@@ -1,18 +1,22 @@
-version: "3.1"
-
+version: '3.1'
 services:
-  postgres :configs:
+  postgres:
     image: postgres:10
-    container_name: postgres_container
-    ports: "5432:5432"
+    container_name: my_postgres_container2
+    ports:
+      - "5432:5432"
     environment:
-      POSTGRES_USER: ayham
+      POSTGRES_USER: johndoe
       POSTGRES_PASSWORD: 123
       POSTGRES_DB: chatapp
-    volumes: postgres_container_data:/var/lib/postgresql/data
+    volumes:
+      - my_postgres_data:/var/lib/postgresql/data
+
 
   redis:
     image: redis:latest
-    ports: "6379:6379"
+    ports:
+      - '6379:6379'
+
 volumes:
-  postgres_container_data:
+  my_postgres_data:
