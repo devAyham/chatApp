@@ -2,11 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-input CreateUserInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
 input LoginDto {
   email: String!
   password: String!
@@ -17,17 +12,16 @@ type LoginResponse {
 }
 
 type Mutation {
-  createUser(createUserInput: CreateUserInput!): User!
   login(loginInput: LoginDto!): LoginResponse!
   logout: String!
   refreshToken: String!
   register(registerInput: RegisterDto!): RegisterResponse!
-  removeUser(id: Int!): User!
-  updateUser(updateUserInput: UpdateUserInput!): User!
+  updateProfile(file: Upload, fullname: String!): User!
 }
 
 type Query {
-  user(id: Int!): User!
+  getUsersOfChatroom(chatroomId: Float!): [User!]!
+  searchUsers(fullname: String!): [User!]!
 }
 
 input RegisterDto {
@@ -41,11 +35,8 @@ type RegisterResponse {
   user: User!
 }
 
-input UpdateUserInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
-}
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
 
 type User {
   avatarUrl: String
