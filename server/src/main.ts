@@ -22,17 +22,17 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({
     whitelist: true,
     transform: true,
-    exceptionFactory(errors) {
-      {
-        const formattedErrors = errors.reduce((accumlator, error) => {
-          accumlator[error.property] = Object.values(error.constraints).join(', ');
-          return accumlator
-        }, {});
-        throw new BadRequestException(formattedErrors)
-      }
-    }
+    // exceptionFactory(errors) {
+    //   {
+    //     const formattedErrors = errors.reduce((accumlator, error) => {
+    //       accumlator[error.property] = Object.values(error.constraints).join(', ');
+    //       return accumlator
+    //     }, {});
+    //     throw new BadRequestException(formattedErrors)
+    //   }
+    // }
   }))
 
   await app.listen(3000);
 }
-bootstrap();
+bootstrap()

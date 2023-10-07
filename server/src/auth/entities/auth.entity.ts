@@ -4,12 +4,12 @@ import { User } from 'src/user/entities/user.entity';
 @ObjectType()
 export class RegisterResponse {
   @Field(() => User)
-  exampleField: User;
+  user: User;
 }
 
 
 @ObjectType()
 export class LoginResponse {
   @Field(() => User)
-  exampleField: User;
+  user: User;
 }

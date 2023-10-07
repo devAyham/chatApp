@@ -7,14 +7,38 @@ input CreateUserInput {
   exampleField: Int!
 }
 
+input LoginDto {
+  email: String!
+  password: String!
+}
+
+type LoginResponse {
+  user: User!
+}
+
 type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
+  login(loginInput: LoginDto!): LoginResponse!
+  logout: String!
+  refreshToken: String!
+  register(registerInput: RegisterDto!): RegisterResponse!
   removeUser(id: Int!): User!
   updateUser(updateUserInput: UpdateUserInput!): User!
 }
 
 type Query {
   user(id: Int!): User!
+}
+
+input RegisterDto {
+  confirmPassword: String!
+  email: String!
+  fullname: String!
+  password: String!
+}
+
+type RegisterResponse {
+  user: User!
 }
 
 input UpdateUserInput {
