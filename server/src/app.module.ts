@@ -3,10 +3,34 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
+import { GraphQLModule } from '@nestjs/graphql'
+import { ApolloDriver } from '@nestjs/apollo';
+import { join } from 'path';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
-  imports: [AuthModule, UserModule],
+  imports: [
+    GraphQLModule.forRootAsync({
+      imports: [ConfigModule, AppModule],
+      inject: [ConfigService],
+      driver: ApolloDriver,
+      useFactory: async (
+        configService: ConfigService,
+        // tokenService:TokenService
+      ) => {
+        return {
+          playground: true,
+          autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+          sortSchema: true
+        }
+      }
+    }),
+    ConfigModule.forRoot({
+      isGlobal: true
+    }),
+    AuthModule,
+    UserModule],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
